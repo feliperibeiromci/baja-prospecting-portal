@@ -20,8 +20,8 @@ export default {
       const body = await request.json().catch(() => null);
       const count = Number(body?.company_count);
 
-      if (!Number.isInteger(count) || count < 1 || count > 5) {
-        return json({ error: "Choose between 1 and 5 companies." }, 400);
+      if (!Number.isInteger(count) || count < 1 || count > 8) {
+        return json({ error: "Choose between 1 and 8 companies." }, 400);
       }
 
       if (!env.N8N_WEBHOOK_URL || !env.N8N_PORTAL_KEY) {

@@ -6,7 +6,7 @@
   const result = document.getElementById('submissionResult');
 
   const min = 1;
-  const max = 5;
+  const max = 8;
 
   // Company counter
   function clamp(n) {
@@ -53,7 +53,7 @@
       companyCount > max
     ) {
       feedback(
-        'Please choose a whole number between 1 and 5.',
+        'Please choose a whole number between 1 and 8.',
         'error'
       );
       return;
