@@ -84,7 +84,7 @@
       }
 
       feedback(
-        `Research started successfully! Up to ${companyCount} companies will be researched. Check n8n for progress.`,
+        `Research started successfully! Up to ${companyCount} companies will be researched. Check Hubspot for progress. It will take 5 minutes.`,
         'success'
       );
 
