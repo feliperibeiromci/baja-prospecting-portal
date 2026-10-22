@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="color-scheme" content="light" />
+  <meta name="description" content="Baja Fulfillment outbound prospecting portal" />
+  <title>Prospecting Portal | Baja Fulfillment</title>
+  <link rel="stylesheet" href="./styles.css" />
+  <script defer src="./app.js"></script>
+</head>
+
+<body>
+  <div class="shell">
+    <aside class="sidebar" aria-label="Portal navigation">
+      <a class="brand" href="#overview" aria-label="Baja Fulfillment portal homepage">
+       
+        <img src="https://irp.cdn-website.com/450307c2/dms3rep/multi/BajaFullfillment-Logo+White.svg" alt="">
+      </a>
+      <div class="sidebar-label">WORKSPACE</div>
+      <nav class="nav-links" aria-label="Main navigation">
+        <a class="nav-link active" href="#overview"><svg viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M3 11.5 12 4l9 7.5V20H3z" />
+            <path d="M9 20v-6h6v6" />
+          </svg> Overview</a>
+        <a class="nav-link" href="#research"><svg viewBox="0 0 24 24" aria-hidden="true">
+            <circle cx="10.5" cy="10.5" r="6.5" />
+            <path d="m16 16 5 5" />
+          </svg> New research</a>
+        <a class="nav-link" href="#workflow"><svg viewBox="0 0 24 24" aria-hidden="true">
+            <rect x="3" y="4" width="7" height="6" rx="1" />
+            <rect x="14" y="14" width="7" height="6" rx="1" />
+            <path d="M10 7h4a3 3 0 0 1 3 3v4" />
+          </svg> How it works</a>
+      </nav>
+      <div class="sidebar-bottom"><span class="dot dot-mint"></span><span>Connected workflow
+          design</span><small>Integration setup required</small></div>
+    </aside>
+
+    <main id="overview" class="main">
+      <header class="topbar">
+        <div class="breadcrumbs">BAJA / <span>PROSPECTING</span></div>
+        <div class="topbar-right"><span class="environment-label">INTERNAL TOOL</span><span class="avatar"
+            title="Baja team">BF</span></div>
+      </header>
+
+      <div class="main-body">
+        <div class="intro">
+          <div>
+            <div class="eyebrow"><span class="eyebrow-line"></span> OUTBOUND WORKSPACE</div>
+            <h1>Find your next <em>opportunity.</em></h1>
+            <p>Discover high-potential brands, validate their fit with Baja's ICPs, and move qualified opportunities
+              into your existing workflow.</p>
+          </div>
+          <div class="intro-illustration" aria-hidden="true">
+            <div class="ring ring-a"></div>
+            <div class="ring ring-b"></div>
+            <div class="spark spark-a">✦</div>
+            <div class="spark spark-b">✦</div><span>BAJA<br /><b>GROWTH</b></span>
+          </div>
+        </div>
+
+        <section id="research" class="section research-section" aria-labelledby="research-heading">
+          <div class="section-heading">
+            <div>
+              <div class="section-kicker">01 — RESEARCH</div>
+              <h2 id="research-heading">Start a new research run</h2>
+              <p>Tell us how many companies to find. We'll handle the sourcing and classification.</p>
+            </div><span class="tag"><span class="dot dot-mint"></span> AUTOMATED</span>
+          </div>
+          <div class="research-grid">
+            <form class="research-form" id="researchForm" novalidate>
+              <label for="companyCount">Number of companies</label>
+              <p class="field-hint">Select the size of this research batch.</p>
+              <div class="count-picker">
+                <button type="button" class="count-control" id="decrease" aria-label="Decrease company count">−</button>
+                <input type="number" id="companyCount" name="company_count" min="1" max="3" step="1" value="3" required
+                  inputmode="numeric" />
+                <button type="button" class="count-control" id="increase" aria-label="Increase company count">+</button>
+              </div>
+              <p class="limit-note"><svg viewBox="0 0 24 24" aria-hidden="true">
+                  <circle cx="12" cy="12" r="9" />
+                  <path d="M12 11v5m0-8h.01" />
+                </svg> Currently limited to 1–3 companies per run.</p>
+              <div class="form-divider"></div>
+              <div class="included-title">WHAT'S INCLUDED</div>
+              <div class="included-list"><span>✓ ICP classification</span><span>✓ Research-backed signals</span><span>✓
+                  Duplicate checks</span><span>✓ Clay enrichment</span></div>
+              <button class="submit-button" type="submit" id="submitButton">Start research <span
+                  aria-hidden="true">↗</span></button>
+              <div class="submission-result" id="submissionResult" role="status" aria-live="polite" hidden></div>
+              <p class="privacy-note">This request starts the existing n8n research workflow. CRM synchronization
+                remains controlled by its existing safeguards.</p>
+            </form>
+            <div class="aside-panel">
+              <div class="aside-eyebrow">THE BAJA APPROACH</div>
+              <h3>Focused research.<br /><span>Better conversations.</span></h3>
+              <p>Every candidate is evaluated against Baja's three outbound profiles before moving to enrichment.</p>
+              <div class="icp-list">
+                <div class="icp-item"><span class="icp-number">01</span>
+                  <div><strong>Complex Operations</strong><small>Multichannel & operational complexity</small></div>
+                </div>
+                <div class="icp-item"><span class="icp-number">02</span>
+                  <div><strong>Retail Entry at Scale</strong><small>Retail launches & expansion</small></div>
+                </div>
+                <div class="icp-item"><span class="icp-number">03</span>
+                  <div><strong>Regional DTC Growth</strong><small>Growing direct-to-consumer brands</small></div>
+                </div>
+              </div>
+              <div class="aside-footer"><span class="line-icon">✧</span> Research is not permission to send outreach.
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section id="workflow" class="section journey-section" aria-labelledby="journey-heading">
+          <div class="section-heading">
+            <div>
+              <div class="section-kicker">02 — PROCESS</div>
+              <h2 id="journey-heading">From discovery to action</h2>
+              <p>Your existing stack does the heavy lifting.</p>
+            </div>
+          </div>
+          <div class="steps">
+            <div class="step">
+              <div class="step-num">01</div>
+              <h3>Discover</h3>
+              <p>Research companies and identify documented buying signals.</p><span>n8n</span>
+            </div>
+            <div class="step">
+              <div class="step-num">02</div>
+              <h3>Qualify</h3>
+              <p>Classify by ICP and prevent duplicate company sourcing.</p><span>AI + n8n</span>
+            </div>
+            <div class="step">
+              <div class="step-num">03</div>
+              <h3>Enrich</h3>
+              <p>Find relevant contacts and verify work email addresses.</p><span>Clay</span>
+            </div>
+            <div class="step">
+              <div class="step-num">04</div>
+              <h3>Review & act</h3>
+              <p>Review ICP 1/2 companies; manage outreach in HubSpot.</p><span>HubSpot</span>
+            </div>
+          </div>
+        </section>
+        <footer>© Baja Fulfillment · Internal prospecting workspace <span>Designed to support the existing n8n + Clay +
+            HubSpot automation.</span></footer>
+      </div>
+    </main>
+  </div>
+</body>
+
+</html>
