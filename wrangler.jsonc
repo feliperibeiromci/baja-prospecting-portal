@@ -2,9 +2,14 @@
   "name": "baja-prospecting-portal",
   "main": "./src/worker.js",
   "compatibility_date": "2026-10-22",
+  "vars": {
+    "N8N_PORTAL_KEY": "F0EF4E7268D343C8764D2A5F9C55492E9F15195B38AB806595B32C271B18C1C3",
+    "N8N_WEBHOOK_URL": "https://skaledai.app.n8n.cloud/webhook/baja-prospecting-start"
+  },
   "assets": {
     "directory": "./public",
     "binding": "ASSETS",
     "run_worker_first": ["/api/*"]
   }
+  
 }
