@@ -78,7 +78,7 @@
 
       if (!response.ok || data.status !== 'accepted') {
         throw new Error(
-          data.message ||
+          data.error || data.message ||
           'The research request could not be accepted.'
         );
       }
