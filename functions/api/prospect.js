@@ -16,11 +16,11 @@ export async function onRequestPost({ request, env }) {
   if (
     !Number.isInteger(companyCount) ||
     companyCount < 1 ||
-    companyCount > 5
+    companyCount > 12
   ) {
     return jsonResponse({
       status: "error",
-      message: "Select between 1 and 5 companies."
+      message: "Select between 1 and 12 companies."
     }, 400);
   }
 

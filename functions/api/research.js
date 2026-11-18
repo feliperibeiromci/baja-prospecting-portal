@@ -15,8 +15,8 @@ export async function onRequestPost({ request, env }) {
   catch { return json({ ok: false, error: 'Please send valid JSON.' }, 400); }
 
   const count = Number(payload?.company_count);
-  if (!Number.isInteger(count) || count < 1 || count > 3) {
-    return json({ ok: false, error: 'Company count must be a whole number between 1 and 3.' }, 400);
+  if (!Number.isInteger(count) || count < 1 || count > 12) {
+    return json({ ok: false, error: 'Company count must be a whole number between 1 and 12.' }, 400);
   }
 
   // Test mode is controlled here, not by the browser/client.

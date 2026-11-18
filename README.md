@@ -24,7 +24,7 @@ npx wrangler secret put N8N_PORTAL_KEY
 
 Use the n8n production webhook URL and the key expected by its X-Baja-Portal-Key header authentication. Never put these values in public/.
 
-The API accepts company_count from 1 through 5 and forwards only that field. The webhook must return a successful HTTP status and a JSON object containing `"status": "accepted"`. HTTP 202 confirms acceptance, not completion of research.
+The API accepts company_count from 1 through 12 and forwards only that field. The webhook must return a successful HTTP status and a JSON object containing `"status": "accepted"`. HTTP 202 confirms acceptance, not completion of research.
 
 For local development, configure the secrets in an untracked .dev.vars file and run `npx wrangler dev`. Opening the HTML directly only previews the UI.
 
