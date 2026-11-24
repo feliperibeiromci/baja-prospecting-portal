@@ -1,3 +1,5 @@
+import { parseCounts } from '../../src/counts.js';
+
 // Cloudflare Pages Function. Secrets stay on the server, never in the browser.
 const json = (data, status = 200) => new Response(JSON.stringify(data), {
   status,
@@ -14,10 +16,9 @@ export async function onRequestPost({ request, env }) {
   try { payload = await request.json(); }
   catch { return json({ ok: false, error: 'Please send valid JSON.' }, 400); }
 
-  const count = Number(payload?.company_count);
-  if (!Number.isInteger(count) || count < 1 || count > 12) {
-    return json({ ok: false, error: 'Company count must be a whole number between 1 and 12.' }, 400);
-  }
+  let counts;
+  try { counts = parseCounts(payload); }
+  catch (error) { return json({ ok: false, error: error.message }, 400); }
 
   // Test mode is controlled here, not by the browser/client.
   const testMode = env.BAJA_TEST_MODE !== 'false';
@@ -29,7 +30,7 @@ export async function onRequestPost({ request, env }) {
         'Content-Type': 'application/json',
         'X-Baja-Portal-Key': env.N8N_WEBHOOK_SECRET
       },
-      body: JSON.stringify({ company_count: count, test_mode: testMode, source: 'baja_portal' }),
+      body: JSON.stringify({ ...counts, test_mode: testMode, source: 'baja_portal' }),
       signal: AbortSignal.timeout(12000)
     });
   } catch {

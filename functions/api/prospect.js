@@ -1,3 +1,5 @@
+import { parseCounts } from '../../src/counts.js';
+
 function jsonResponse(data, status = 200) {
   return new Response(JSON.stringify(data), {
     status,
@@ -11,18 +13,9 @@ function jsonResponse(data, status = 200) {
 export async function onRequestPost({ request, env }) {
 
   const body = await request.json().catch(() => null);
-  const companyCount = Number(body?.company_count);
-
-  if (
-    !Number.isInteger(companyCount) ||
-    companyCount < 1 ||
-    companyCount > 12
-  ) {
-    return jsonResponse({
-      status: "error",
-      message: "Select between 1 and 12 companies."
-    }, 400);
-  }
+  let counts;
+  try { counts = parseCounts(body); }
+  catch (error) { return jsonResponse({ status: 'error', message: error.message }, 400); }
 
   if (!env.N8N_WEBHOOK_URL || !env.N8N_PORTAL_KEY) {
     return jsonResponse({
@@ -38,9 +31,7 @@ export async function onRequestPost({ request, env }) {
         "Content-Type": "application/json",
         "X-Baja-Portal-Key": env.N8N_PORTAL_KEY
       },
-      body: JSON.stringify({
-        company_count: companyCount
-      })
+      body: JSON.stringify(counts)
     });
 
     const text = await response.text();
@@ -67,7 +58,7 @@ export async function onRequestPost({ request, env }) {
     return jsonResponse({
       status: "accepted",
       message: "Research request started successfully.",
-      company_count: companyCount
+      ...counts
     }, 202);
 
   } catch (error) {

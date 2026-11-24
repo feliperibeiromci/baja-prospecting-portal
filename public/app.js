@@ -1,36 +1,17 @@
 
 (() => {
-  const count = document.getElementById('companyCount');
   const form = document.getElementById('researchForm');
   const button = document.getElementById('submitButton');
   const result = document.getElementById('submissionResult');
-
-  const min = 1;
-  const max = 12;
-
-  // Company counter
-  function clamp(n) {
-    return Math.min(max, Math.max(min, n));
-  }
-
-  function updateCount(n) {
-    count.value = String(clamp(n));
-  }
-
-  document.getElementById('decrease').addEventListener('click', () => {
-    updateCount((Number(count.value) || min) - 1);
-  });
-
-  document.getElementById('increase').addEventListener('click', () => {
-    updateCount((Number(count.value) || min) + 1);
-  });
-
-  count.addEventListener('change', () => {
-    const value = Number(count.value);
-
-    if (count.value.trim() !== '' && Number.isInteger(value)) {
-      updateCount(value);
-    }
+  const fields = [1, 2, 3].map(i => ({ key: `icp${i}_count`, input: document.getElementById(`icp${i}Count`) }));
+  fields.forEach(({ input }, index) => {
+    const i = index + 1;
+    const update = delta => {
+      const current = Number(input.value);
+      input.value = String(Math.min(5, Math.max(0, (Number.isInteger(current) ? current : 0) + delta)));
+    };
+    document.getElementById(`decrease${i}`).addEventListener('click', () => update(-1));
+    document.getElementById(`increase${i}`).addEventListener('click', () => update(1));
   });
 
   // Feedback messages
@@ -44,18 +25,10 @@
   form.addEventListener('submit', async (event) => {
     event.preventDefault();
 
-    const companyCount = Number(count.value);
-
-    if (
-      count.value.trim() === '' ||
-      !Number.isInteger(companyCount) ||
-      companyCount < min ||
-      companyCount > max
-    ) {
-      feedback(
-        'Please choose a whole number between 1 and 12.',
-        'error'
-      );
+    const counts = Object.fromEntries(fields.map(({ key, input }) => [key, Number(input.value)]));
+    const total = Object.values(counts).reduce((sum, count) => sum + count, 0);
+    if (fields.some(({ key, input }) => input.value.trim() === '' || !Number.isInteger(counts[key]) || counts[key] < 0 || counts[key] > 5) || total === 0) {
+      feedback('Choose a whole number from 0 to 5 for each ICP, with at least one company in total.', 'error');
       return;
     }
 
@@ -69,9 +42,7 @@
         headers: {
           'Content-Type': 'application/json'
         },
-        body: JSON.stringify({
-          company_count: companyCount
-        })
+        body: JSON.stringify(counts)
       });
 
       const data = await response.json().catch(() => ({}));
@@ -84,7 +55,7 @@
       }
 
       feedback(
-        `Research started successfully! Up to ${companyCount} companies will be researched. Check Hubspot for progress. It will take 5 minutes.`,
+        `Research started! ICP 1: ${counts.icp1_count}, ICP 2: ${counts.icp2_count}, ICP 3: ${counts.icp3_count} — up to ${total} companies. Duplicate checks and qualification may reduce the final results. Check HubSpot for progress.`,
         'success'
       );
 

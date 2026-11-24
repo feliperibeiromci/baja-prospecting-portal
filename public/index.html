@@ -66,23 +66,40 @@
             <div>
               <div class="section-kicker">01 — RESEARCH</div>
               <h2 id="research-heading">Start a new research run</h2>
-              <p>Tell us how many companies to find. We'll handle the sourcing and classification.</p>
+              <p>Choose how many companies to find for each ICP. Each profile has its own focused research.</p>
             </div><span class="tag"><span class="dot dot-mint"></span> AUTOMATED</span>
           </div>
           <div class="research-grid">
             <form class="research-form" id="researchForm" novalidate>
-              <label for="companyCount">Number of companies</label>
-              <p class="field-hint">Select the size of this research batch.</p>
-              <div class="count-picker">
-                <button type="button" class="count-control" id="decrease" aria-label="Decrease company count">−</button>
-                <input type="number" id="companyCount" name="company_count" min="1" max="12" step="1" value="3" required
-                  inputmode="numeric" />
-                <button type="button" class="count-control" id="increase" aria-label="Increase company count">+</button>
+              <h3>How many companies per ICP?</h3>
+              <p class="field-hint" id="countHelp">Choose 0–5 for each profile. Use 0 to skip a profile.</p>
+              <div class="icp-counts">
+                <div class="icp-count-field">
+                  <label for="icp1Count">ICP 1 · Complex Operations</label>
+                  <div class="count-picker">
+                    <button type="button" class="count-control" id="decrease1" aria-label="Decrease ICP 1 company count">−</button>
+                    <input type="number" id="icp1Count" name="icp1_count" min="0" max="5" step="1" value="3" required inputmode="numeric" aria-describedby="countHelp" />
+                    <button type="button" class="count-control" id="increase1" aria-label="Increase ICP 1 company count">+</button>
+                  </div>
+                </div>
+                <div class="icp-count-field">
+                  <label for="icp2Count">ICP 2 · Retail Entry at Scale</label>
+                  <div class="count-picker">
+                    <button type="button" class="count-control" id="decrease2" aria-label="Decrease ICP 2 company count">−</button>
+                    <input type="number" id="icp2Count" name="icp2_count" min="0" max="5" step="1" value="3" required inputmode="numeric" aria-describedby="countHelp" />
+                    <button type="button" class="count-control" id="increase2" aria-label="Increase ICP 2 company count">+</button>
+                  </div>
+                </div>
+                <div class="icp-count-field">
+                  <label for="icp3Count">ICP 3 · Regional DTC Growth</label>
+                  <div class="count-picker">
+                    <button type="button" class="count-control" id="decrease3" aria-label="Decrease ICP 3 company count">−</button>
+                    <input type="number" id="icp3Count" name="icp3_count" min="0" max="5" step="1" value="3" required inputmode="numeric" aria-describedby="countHelp" />
+                    <button type="button" class="count-control" id="increase3" aria-label="Increase ICP 3 company count">+</button>
+                  </div>
+                </div>
               </div>
-              <p class="limit-note"><svg viewBox="0 0 24 24" aria-hidden="true">
-                  <circle cx="12" cy="12" r="9" />
-                  <path d="M12 11v5m0-8h.01" />
-                </svg> Currently limited to 1–12 companies per run.</p>
+              <p class="limit-note">Up to 5 companies per ICP · 15 total per run. Results may be fewer after research and duplicate checks.</p>
               <div class="form-divider"></div>
               <div class="included-title">WHAT'S INCLUDED</div>
               <div class="included-list"><span>✓ ICP classification</span><span>✓ Research-backed signals</span><span>✓

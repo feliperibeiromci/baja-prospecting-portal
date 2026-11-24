@@ -1,4 +1,6 @@
-﻿function json(data, status = 200) {
+import { parseCounts } from './counts.js';
+
+function json(data, status = 200) {
   return new Response(JSON.stringify(data), {
     status,
     headers: {
@@ -18,11 +20,9 @@ export default {
       }
 
       const body = await request.json().catch(() => null);
-      const count = Number(body?.company_count);
-
-      if (!Number.isInteger(count) || count < 1 || count > 12) {
-        return json({ error: "Choose between 1 and 12 companies." }, 400);
-      }
+      let counts;
+      try { counts = parseCounts(body); }
+      catch (error) { return json({ error: error.message }, 400); }
 
       if (!env.N8N_WEBHOOK_URL || !env.N8N_PORTAL_KEY) {
         return json({ error: "Research API is not configured." }, 503);
@@ -35,7 +35,7 @@ export default {
             "Content-Type": "application/json",
             "X-Baja-Portal-Key": env.N8N_PORTAL_KEY
           },
-          body: JSON.stringify({ company_count: count })
+          body: JSON.stringify(counts)
         });
 
         const data = await response.json().catch(() => null);
@@ -49,7 +49,7 @@ export default {
         return json({
           status: "accepted",
           message: "Research request started successfully.",
-          company_count: count
+          ...counts
         }, 202);
       } catch (error) {
         console.error("n8n connection error", error);
